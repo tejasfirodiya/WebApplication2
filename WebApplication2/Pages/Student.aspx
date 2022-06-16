@@ -16,7 +16,7 @@
         <h1 >Student Form</h1>
     </div>
     <form id="form1" runat="server">
-        <div>
+        <div >
              <asp:Label ID="LabelRollNo" runat="server" Text="Roll No"></asp:Label>
             <asp:TextBox ID="TextBoxRollNo" runat="server"></asp:TextBox>
 

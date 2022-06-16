@@ -30,6 +30,7 @@
                     <td><%= student.Student_email %></td>
                     <td><%= student.Student_Address %></td>
                     <td><%= student.FK_Course_Id %></td>
+                    <td><a href="Update.aspx?id=<%=student.Student_Id%>">Update </a></td>
 
 
                 </tr>

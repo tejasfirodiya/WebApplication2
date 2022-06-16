@@ -17,11 +17,10 @@ namespace ClassLibrary1
             var student = new List<Student>();
             using (var connection = new SqlConnection(connectionstring))
             {
-
-
-                string cmdtext = "Select * from student.Student";
+                string cmdtext = "GetallAndByID";
                 using (var command = new SqlCommand(cmdtext, connection))
                 {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
                     connection.Open();
                     var Reader = command.ExecuteReader();
                     while (Reader.Read())
@@ -43,15 +42,39 @@ namespace ClassLibrary1
             }
             return student;
         }
-
-
-
-
-
-
         //@Student_Id
 
+        public List<Student> GetByID( int id)
+        {
+            var student = new List<Student>();
+            using (var connection = new SqlConnection(connectionstring))
+            {
+                string cmdtext = "GetallAndByID";
+                using (var command = new SqlCommand(cmdtext, connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@id", id);
+                    connection.Open();
+                    var Reader = command.ExecuteReader();
+                    while (Reader.Read())
+                    {
+                        var stud = new Student
+                        {
+                            Student_Id = (int)Reader["Student_Id"],
+                            Student_Name = Reader["Student_Name"].ToString(),
+                            Student_Roll_No = (int)Reader["Student_Roll_No"],
+                            Student_Address = (string)Reader["Student_Address"],
+                            Student_email = (string)Reader["Student_email"],
+                            FK_Course_Id = (int)Reader["FK_Course_Id"]
 
+                        };
+
+                        student.Add(stud);
+                    }
+                }
+            }
+            return student;
+        }
         public void Add(Student student)
         {
             try
